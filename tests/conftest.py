@@ -1,5 +1,6 @@
 import pytest
 from selenium import webdriver
+from constants import Constants
 
 
 @pytest.fixture(params=['firefox', 'chrome'])
@@ -14,3 +15,12 @@ def driver(request):
     yield browser
 
     browser.quit()
+
+
+"""@pytest.fixture
+def driver():
+    browser = webdriver.Chrome()
+    browser.get(Constants.URL)
+    yield browser
+    browser.quit()"""
+

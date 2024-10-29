@@ -12,14 +12,14 @@ class TestMainPage:
         constructor = MainPage(driver)
         constructor.get_url(Constants.URL_LOGIN)
         constructor.click_constructor_button()
-        assert constructor.current_url == Constants.URL_LOGIN
+        assert driver.current_url == Constants.URL
 
     @allure.title('Переход по клику на "Лента Заказов"')
     def test_go_to_feed_orders(self, driver):
         feed = MainPage(driver)
         feed.get_url(Constants.URL_LOGIN)
         feed.click_feed_orders_button()
-        assert feed.current_url == Constants.URL_FEED
+        assert driver.current_url == Constants.URL_FEED
 
     #
     @allure.title('Проверка открытия окна с деталями ингредиентов')
@@ -52,6 +52,7 @@ class TestMainPage:
     @allure.title('Залогиненный пользователь может оформить заказ.')
     def test_create_order_successful(self, driver):
         login = LoginPage(driver)
+        login.get_url(Constants.URL_LOGIN)
         login.login("gismo513@mail.ru", "123456789")
         order = MainPage(driver)
         order.add_filling_to_order()

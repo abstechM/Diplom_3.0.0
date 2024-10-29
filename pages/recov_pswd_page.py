@@ -1,7 +1,4 @@
 import allure
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
-
 from locators.locators_recov_pswd import ResetPswdLocators
 from pages.base_page import BasePage
 
@@ -11,6 +8,10 @@ class PswdPage(BasePage):
     def input_email_for_reset_password(self, email):
         self.set_text_to_elemet(ResetPswdLocators.INPUT_EMAIL, email)
 
+
+    @allure.step("Нажать Восстановить пароль")
+    def click_recovery_psw_button(self):
+        self.click_on_element(ResetPswdLocators.BUTTON_RECOVERY)
 
     @allure.step("Нажать Восстановить")
     def click_recovery_button(self):

@@ -21,6 +21,7 @@ class TestOrder:
     @allure.title('Заказ пользователя из раздела «История заказов» отображается на странице «Лента заказов»')
     def test_id_order_history_found_in_feed_orders(self, driver):
         login = LoginPage(driver)
+        login.get_url(Constants.URL_LOGIN)
         login.login("gismo513@mail.ru", "123456789")
         create = MainPage(driver)
         create.add_filling_to_order()
@@ -28,7 +29,7 @@ class TestOrder:
         order = OrderPage(driver)
         order_id = order.get_order_id()
         order.click_cross_order()
-        create.click_lk_button_button()
+        create.click_lk_button()
         account = LkPage(driver)
         account.click_order_history()
         id_order_history = order.order_id_found_history(order_id)
@@ -39,6 +40,7 @@ class TestOrder:
     @allure.title('при создании нового заказа счётчик Выполнено за всё время увеличивается,')
     def test_total_counter_order(self, driver):
         login = LoginPage(driver)
+        login.get_url(Constants.URL_LOGIN)
         login.login("gismo513@mail.ru", "123456789")
         create = MainPage(driver)
         create.click_feed_orders_button()
@@ -56,6 +58,7 @@ class TestOrder:
     @allure.title('При создании нового заказа счётчик Выполнено за сегодня увеличивается')
     def test_daily_counter_order(self, driver):
         login = LoginPage(driver)
+        login.get_url(Constants.URL_LOGIN)
         login.login("gismo513@mail.ru", "123456789")
         create = MainPage(driver)
         create.click_feed_orders_button()
@@ -64,6 +67,7 @@ class TestOrder:
         create.click_constructor_button()
         create.add_filling_to_order()
         create.click_create_order_button()
+        print(counter_value)
         order.wait_loading_cross_button()
         order.click_cross_order()
         create.click_feed_orders_button()
@@ -73,6 +77,7 @@ class TestOrder:
     @allure.title('После оформления заказа его номер появляется в разделе в работе')
     def test_new_order_show_work_list(self, driver):
         login = LoginPage(driver)
+        login.get_url(Constants.URL_LOGIN)
         login.login("gismo513@mail.ru", "123456789")
         create = MainPage(driver)
         create.add_filling_to_order()
